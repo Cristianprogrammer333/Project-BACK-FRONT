@@ -170,8 +170,10 @@ button:hover {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/paypal.css">
+    <!-- <link rel="stylesheet" href=""> -->
+    <link rel="shortcut icon" href="./img/aerolinea.png" type="image/x-icon">
     <title>Pasarela de Pago</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             display: flex;
@@ -179,7 +181,8 @@ button:hover {
             align-items: center;
             height: 100vh;
             margin: 0;
-            background: #f0f0f0;
+            background-image: url('https://w.forfun.com/fetch/a6/a686c81f67e4dd4069477f71f5a7be03.jpeg');
+            background-size: cover;
             font-family: Arial, sans-serif;
         }
 
@@ -209,7 +212,7 @@ button:hover {
         }
 
         .card {
-            background: linear-gradient(135deg, #3ee462, #1ee639);
+            background: linear-gradient(135deg, #c7e737, #ccb115);
             padding: 25px;
             border-radius: 10px;
             color: #fff;
@@ -271,7 +274,7 @@ button:hover {
         }
 
         button {
-            background: linear-gradient(90deg, #29db38, #35e043);
+            background: linear-gradient(90deg, #d3e719, #dbc818);
             color: #fff;
             border: none;
             padding: 15px;
@@ -302,48 +305,33 @@ button:hover {
                 </div>
             </div>
         </div>
-        <form id="paymentForm">
+
             <div class="input-group">
                 <label for="cardName">Nombre del Titular</label>
-                <input type="text" id="cardName" placeholder="Nombre del Titular" required>
+                <input type="text" i id="nombre" placeholder="Nombre del Titular" required>
             </div>
             <div class="input-group">
                 <label for="cardNumber">Número de Tarjeta</label>
-                <input type="text" id="cardNumber" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" required>
+                <input type="text"  id="numerotarjeta" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" required>
             </div>
             <div class="input-group half">
                 <label for="expiryDate">Fecha de Expiración</label>
-                <input type="text" id="expiryDate" placeholder="MM/AA" maxlength="5" required>
+                <input type="text"  id="fecha_expiracion" placeholder="MM/AA" maxlength="5" required>
             </div>
             <div class="input-group half">
                 <label for="cvv">CVV</label>
-                <input type="text" id="cvv" placeholder="CVV" maxlength="3" required>
+                <input type="text"  id="cvv" placeholder="CVV" maxlength="3" required>
             </div>
+            <button  onclick="RegistrarTarjeta()">guardar datos de pago</button>
+            <br>
+            <br>
             <button type="submit" id="checkout">Pagar</button>
-        </form>
+
     </div>
     <!-- Script de javascript -->
     <script>
-        // Función para actualizar los datos de la tarjeta en tiempo real
-        document.getElementById('cardName').addEventListener('input', function() {
-            document.getElementById('cardNameDisplay').innerText = this.value;
-        });
-
-        document.getElementById('cardNumber').addEventListener('input', function() {
-            let value = this.value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ');
-            document.getElementById('cardNumberDisplay').innerText = value.trim();
-        });
-
-        document.getElementById('expiryDate').addEventListener('input', function() {
-            let value = this.value.replace(/\D/g, '').replace(/(\d{2})(\d{2})/, '$1/$2');
-            document.getElementById('expiryDateDisplay').innerText = value;
-        });
-
-        document.getElementById('cvv').addEventListener('input', function() {
-            document.getElementById('cvvDisplay').innerText = this.value;
-        });
-            // obtiene el elemento del boton de pago por su id ('cehckout')
-            const checkout = document.getElementById('checkout');
+      // obtiene el elemento del boton de pago por su id ('cehckout')
+         const checkout = document.getElementById('checkout');
         
         //Agrega una escucha de eventos al hacer click en el boton
         checkout.addEventListener('click', async() =>{
@@ -358,6 +346,93 @@ button:hover {
             //redirige a la url proporcionada en los datos de respuesta
             window.location.href = data.links[1].href;
         });
+    </script>
+    <script>
+        const RegistrarTarjeta = () => {
+  const nombre = document.getElementById("nombre").value;
+  const numerotarjeta = document.getElementById("numerotarjeta").value;
+  const fecha_expiracion = document.getElementById("fecha_expiracion").value;
+  const cvv = document.getElementById("cvv").value;
+
+  const url = "https://render.com/docs/web-services#port-binding";
+
+  let token = "";
+  const cookieToken = document.cookie;
+
+  if (cookieToken) {
+    const cookies = cookieToken.split(";");
+    cookies.forEach((cookie) => {
+      const [nombre, valor] = cookie.split("=");
+      if (nombre.trim() === "token") {
+        token = valor;
+      }
+    });
+  } else {
+    alert("Debe loguearse nuevamente");
+    return;
+  }
+  if (token === "") {
+    alert("Debe loguearse nuevamente");
+    return;
+  }
+
+  const headers = {
+    "x-access-token": token,
+    "Content-type": "application/json",
+  };
+
+  const options = {
+    method: "POST",
+    body: JSON.stringify({
+      id: null, // null for new records
+      nombre,
+      numerotarjeta,
+      fecha_expiracion,
+      cvv,
+    }),
+    headers,
+  };
+
+  fetch(url, options)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Tarjeta registrada con éxito",
+      });
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      const Toast = Swal.mixin({
+        toast: false,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "warning",
+        title: "Error al registrar la tarjeta",
+      });
+    });
+};
+
     </script>
 </body>
 </html>

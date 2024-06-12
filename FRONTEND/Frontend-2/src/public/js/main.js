@@ -51,7 +51,7 @@ const GuardarUsuario = () => {
   const contrasena = document.getElementById("contrasena").value;
   const telefono = document.getElementById("telefono").value;
 
-  const url = "http://localhost:20000/api/usuario";
+  const url = "https://render.com/docs/web-services#port-binding";
   const options = {
     method: "POST",
     headers: {
@@ -95,7 +95,7 @@ const GuardarReserva = () => {
   // Obtener los servicios seleccionados por el usuario
   const serviciosSeleccionados = Array.from(document.querySelectorAll(".servicio:checked")).map(input => input.value);
 
-  const url = "http://localhost:13000/api/vuelo";
+  const url = "https://render.com/docs/web-services#port-binding";
   let token = "";
   const cookieToken = document.cookie;
 
@@ -186,7 +186,7 @@ const RegistrarReservacion = () => {
   const destino = document.getElementById("destino").value;
   const estado = document.getElementById("estado").value;
 
-  const url = "http://localhost:12222/api/aerolinea";
+  const url = "https://render.com/docs/web-services#port-binding";
   let token = "";
   const cookieToken = document.cookie;
 
@@ -269,13 +269,15 @@ const RegistrarReservacion = () => {
     });
 };
 
+
+
 const GuardarPeticion = () => {
   // Obtener los valores de los campos del formulario
   const Nombre = document.getElementById("Nombre").value;
   const Correo = document.getElementById("Correo").value;
   const Mensaje = document.getElementById("Mensaje").value;
 
-  const url = "http://localhost:7777/api/usuario";
+  const url = "https://render.com/docs/web-services#port-binding";
   let token = "";
   const cookieToken = document.cookie;
 
@@ -378,16 +380,7 @@ const ModificarUsuario = () => {
   const contrasena = document.getElementById("contrasena").value;
   const telefono = document.getElementById("telefono").value;
 
-  const url = "http://localhost:20000/api/usuario";
-  // const option = {
-  //     method : "POST",
-  //     body:  JSON.stringify({
-  //         "idusuario": codigo
-  //     })
-  // }
-
-  // alert('Registro guardado');
-
+  const url = "https://render.com/docs/web-services#port-binding";
   let token = "";
   const cookieToken = document.cookie;
 
@@ -468,7 +461,7 @@ const borrar = async (event) => {
 
   //
   let retorno = false;
-  const url = "http://localhost:20000/api/usuario";
+  const url = "https://render.com/docs/web-services#port-binding";
   const option = {
     method: "DELETE",
     body: JSON.stringify({
@@ -506,7 +499,7 @@ const RegistrarPagos = () => {
   // //     return;
   // }
 
-  const url = "http://localhost:9999/api/reserva";
+  const url = "https://render.com/docs/web-services#port-binding";
 
   let token = "";
   const cookieToken = document.cookie;
@@ -596,7 +589,7 @@ const RegistrarServiciosEspeciales = () => {
   const description = document.getElementById("description").value;
   const request_date = document.getElementById("request_date").value;
 
-  const url = "http://localhost:8888/api/servicio";
+  const url = "https://render.com/docs/web-services#port-binding";
 
   let token = "";
   const cookieToken = document.cookie;
@@ -786,92 +779,6 @@ const Reporte = (event) => {
   reporteWindow.document.close();
 };
 
-
-
-
-// esta constante nos sirve para que el usuario ingrese su aerolinea favorita o el administrador
-
-// const GuardarAerolinea = () =>{
-//   const Nombre = document.getElementById("Nombre").value;
-//   const Codigo = document.getElementById("Codigo").value;
-//   const PaisOrigen = document.getElementById("PaisOrigen").value;
-
-//   const url = "http://localhost:12222/api/aerolinea";
-//   let token = "";
-//   const cookieToken = document.cookie;
-
-//   if (cookieToken) {
-//     const cookies = cookieToken.split(";");
-//     cookies.forEach((cookie) => {
-//       const [nombre, valor] = cookie.split("=");
-//       if (nombre.trim() === "token") {
-//         token = valor;
-//       }
-//     });
-//   } else {
-//     alert("Debe loguearse nuevamente");
-//     return;
-//   }
-//   if (token == "") {
-//     alert("Debe loguearse nuevamente");
-//     return;
-//   }
-
-//   const headers = {
-//     "x-access-token": token,
-//     "Content-type": "application/json",
-//   };
-
-//   const options = {
-//     method: "POST",
-//     body: JSON.stringify({
-//       ID_Aerolinea: null,
-//       Nombre,
-//       Codigo,
-//       PaisOrigen,
-//     }),
-//     headers,
-//   };
-//   fetch(url, options)
-//     .then((res) => res.json())
-//     .then((data) => {
-//       console.log(data);
-//       const Toast = Swal.mixin({
-//         toast: true,
-//         position: "top-end",
-//         showConfirmButton: false,
-//         timer: 3000,
-//         timerProgressBar: true,
-//         didOpen: (toast) => {
-//           toast.onmouseenter = Swal.stopTimer;
-//           toast.onmouseleave = Swal.resumeTimer;
-//         },
-//       });
-//       Toast.fire({
-//         icon: "success",
-//         title: "Servicio solicitado con exito",
-//       });
-//     })
-//     .catch((error) => {
-//       const Toast = Swal.mixin({
-//         toast: false,
-//         position: "top-end",
-//         showConfirmButton: false,
-//         timer: 3000,
-//         timerProgressBar: true,
-//         didOpen: (toast) => {
-//           toast.onmouseenter = Swal.stopTimer;
-//           toast.onmouseleave = Swal.resumeTimer;
-//         },
-//       });
-//       Toast.fire({
-//         icon: "warning",
-//         title: "Error al solicitar el servicio",
-//       });
-//   });
-// };
-
-// Base de datos de destinos
 const destinos = [
   {
       aerolinea: "American Airlines",
@@ -880,7 +787,8 @@ const destinos = [
       horaSalida: "09:00",
       horaLlegada: "14:00",
       vip: true,
-      disponibilidad: true
+      disponibilidad: true,
+      imgUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu_%28cropped%29.jpg/800px-View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu_%28cropped%29.jpg"
   },
   {
       aerolinea: "Lufthansa",
@@ -889,7 +797,8 @@ const destinos = [
       horaSalida: "12:00",
       horaLlegada: "17:00",
       vip: false,
-      disponibilidad: true
+      disponibilidad: true,
+      imgUrl: "https://humanidades.com/wp-content/uploads/2018/09/francia-3-800x414.jpg"
   },
   {
       aerolinea: "Emirates",
@@ -898,7 +807,8 @@ const destinos = [
       horaSalida: "15:00",
       horaLlegada: "23:00",
       vip: true,
-      disponibilidad: true
+      disponibilidad: true,
+      imgUrl: "https://cdn.getyourguide.com/img/tour/5bb551eebafcde0c6d3d354bf15aa98cc366f201368b2ce871bd39a34ecdec21.jpg/97.jpg"
   },
   {
       aerolinea: "Qantas",
@@ -907,7 +817,8 @@ const destinos = [
       horaSalida: "18:00",
       horaLlegada: "07:00",
       vip: false,
-      disponibilidad: true
+      disponibilidad: true,
+      imgUrl: "https://images.skypicker.com/?image=https%3A%2F%2Fimages.kiwi.com%2Fphotos%2Foriginals%2Fsydney_ns_au.jpg&width=992&height=600&quality=80&fit=crop&format=original"
   },
   {
       aerolinea: "British Airways",
@@ -916,7 +827,8 @@ const destinos = [
       horaSalida: "10:00",
       horaLlegada: "15:00",
       vip: true,
-      disponibilidad: false
+      disponibilidad: false,
+      imgUrl: "https://idiomas.camarabilbao.com/wp-content/uploads/sites/2/2017/05/London_from_a_hot_air_balloon-1.jpg"
   },
   {
       aerolinea: "Singapore Airlines",
@@ -925,7 +837,8 @@ const destinos = [
       horaSalida: "08:00",
       horaLlegada: "16:00",
       vip: true,
-      disponibilidad: true
+      disponibilidad: true,
+      imgUrl: "https://camaraenruta.com/wp-content/uploads/2016/09/que-ver-en-Singapur-guia-de-viajes.jpg"
   },
   {
       aerolinea: "Delta Air Lines",
@@ -934,7 +847,8 @@ const destinos = [
       horaSalida: "14:00",
       horaLlegada: "22:00",
       vip: false,
-      disponibilidad: true
+      disponibilidad: true,
+      imgUrl: "https://www.nippon.com/es/ncommon/contents/japan-glances/2148613/2148613.jpg"
   },
   {
       aerolinea: "Air France",
@@ -943,7 +857,8 @@ const destinos = [
       horaSalida: "11:00",
       horaLlegada: "16:00",
       vip: true,
-      disponibilidad: true
+      disponibilidad: true,
+      imgUrl: "https://www.icarito.cl/wp-content/uploads/2012/05/antigua-Roma-1024x593.png"
   },
   {
       aerolinea: "Cathay Pacific",
@@ -952,7 +867,8 @@ const destinos = [
       horaSalida: "16:00",
       horaLlegada: "00:00",
       vip: true,
-      disponibilidad: false
+      disponibilidad: false,
+      imgUrl: "https://www.discoverhongkong.com/ca/explore/attractions/hong-kong-night-view.thumb.800.480.png?ck=1702972619"
   },
   {
       aerolinea: "KLM",
@@ -961,7 +877,8 @@ const destinos = [
       horaSalida: "13:00",
       horaLlegada: "18:00",
       vip: false,
-      disponibilidad: true
+      disponibilidad: true,
+      imgUrl: "https://img2.rtve.es/i/?w=1600&i=1698226240350.jpg"
   },
   {
       aerolinea: "Qatar Airways",
@@ -970,7 +887,8 @@ const destinos = [
       horaSalida: "20:00",
       horaLlegada: "02:00",
       vip: true,
-      disponibilidad: true
+      disponibilidad: true,
+      imgUrl: "https://a.travel-assets.com/findyours-php/viewfinder/images/res70/482000/482071-Doha-Corniche.jpg"
   },
   {
       aerolinea: "Turkish Airlines",
@@ -979,7 +897,8 @@ const destinos = [
       horaSalida: "14:00",
       horaLlegada: "20:00",
       vip: false,
-      disponibilidad: true
+      disponibilidad: true,
+      imgUrl: "https://fotografias.larazon.es/clipping/cmsimages01/2019/08/14/783417B9-3675-419D-A760-CE67DD3F1FDA/98.jpg?crop=567,319,x0,y7&width=1900&height=1069&optimize=low&format=webply"
   },
   {
       aerolinea: "Air Canada",
@@ -988,7 +907,8 @@ const destinos = [
       horaSalida: "08:00",
       horaLlegada: "13:00",
       vip: false,
-      disponibilidad: true
+      disponibilidad: true,
+      imgUrl: "https://media.cntraveler.com/photos/5b2be6938b842c3b35c5d30c/2:1/w_2560%2Cc_limit/Toronto_getty-Images_748610951.jpg"
   },
   {
       aerolinea: "Avianca",
@@ -997,7 +917,8 @@ const destinos = [
       horaSalida: "10:00",
       horaLlegada: "14:00",
       vip: true,
-      disponibilidad: true
+      disponibilidad: true,
+      imgUrl: "https://www.cepal.org/sites/default/files/styles/1920x1080/public/regionaloffice/images/bogota.jpg?itok=6GS_dObY"
   },
   {
       aerolinea: "Copa Airlines",
@@ -1006,7 +927,8 @@ const destinos = [
       horaSalida: "09:00",
       horaLlegada: "12:00",
       vip: false,
-      disponibilidad: true
+      disponibilidad: true,
+      imgUrl: "https://media.gq.com.mx/photos/635c136db430aa98c0db8aee/16:9/w_2560%2Cc_limit/ciudad%2520de%2520panama-1204869339.jpg"
   },
   {
       aerolinea: "LATAM Airlines",
@@ -1015,67 +937,65 @@ const destinos = [
       horaSalida: "11:00",
       horaLlegada: "17:00",
       vip: true,
-      disponibilidad: true
+      disponibilidad: true,
+      imgUrl: "https://www.nextleveloftravel.com/data/blog/2254/santiago-de-chile-and-daytrips-9-places-to-visit-and-more.jpg"
   }
 ];
 
 // Función para mostrar los destinos en el contenedor
 function mostrarDestinos() {
-    const container = document.getElementById('destinationsContainer');
-    container.innerHTML = ''; // Limpiar contenido previo
+  const container = document.getElementById('destinationsContainer');
+  container.innerHTML = ''; // Limpiar contenido previo
 
-    destinos.forEach((destino, index) => {
-        const destinationDiv = document.createElement('div');
-        destinationDiv.className = 'destination';
-        destinationDiv.style.animationDelay = `${index * 0.1}s`; // Añadir retraso de animación
+  destinos.forEach((destino, index) => {
+      const destinationDiv = document.createElement('div');
+      destinationDiv.className = 'destination';
+      destinationDiv.style.animationDelay = `${index * 0.1}s`; // Añadir retraso de animación
 
-        destinationDiv.innerHTML = `
-            <img src="https://source.unsplash.com/300x200/?airplane,${destino.destino}" alt="Imagen del destino">
-            <h3>${destino.destino}</h3>
-            <p><strong>Aerolínea:</strong> ${destino.aerolinea}</p>
-            <p><strong>Precio:</strong> ${destino.precio}</p>
-            <p><strong>Hora de salida:</strong> ${destino.horaSalida}</p>
-            <p><strong>Hora de llegada:</strong> ${destino.horaLlegada}</p>
-            <p><strong>VIP:</strong> ${destino.vip ? 'Sí' : 'No'}</p>
-            <p class="${destino.disponibilidad ? 'availability' : 'unavailability'}">${destino.disponibilidad ? 'Disponible' : 'No disponible'}</p>
-            <button class="btn-reservar">Reservar</button>
-        `;
+      destinationDiv.innerHTML = `
+          <img src="${destino.imgUrl}" alt="Imagen del destino">
+          <h3>${destino.destino}</h3>
+          <p><strong>Aerolínea:</strong> ${destino.aerolinea}</p>
+          <p><strong>Precio:</strong> ${destino.precio}</p>
+          <p><strong>Hora de salida:</strong> ${destino.horaSalida}</p>
+          <p><strong>Hora de llegada:</strong> ${destino.horaLlegada}</p>
+          <p><strong>VIP:</strong> ${destino.vip ? 'Sí' : 'No'}</p>
+          <p class="${destino.disponibilidad ? 'availability' : 'unavailability'}">${destino.disponibilidad ? 'Disponible' : 'No disponible'}</p>
+          <button class="btn-reservar">Reservar</button>
+      `;
 
-        container.appendChild(destinationDiv);
-    });
-    // Obtener el modal y el botón para cerrarlo
-    const modal = document.getElementById("myModal");
-    const closeButton = document.querySelector(".close");
-    
-    // Mostrar el modal cuando se haga clic en el botón de reservar
-    const botonesReservar = document.querySelectorAll('.btn-reservar');
-    botonesReservar.forEach((boton) => {
-        boton.addEventListener('click', () => {
-            modal.style.display = "block";
-        });
-    });
-    
-    // Ocultar el modal cuando se haga clic en el botón de cerrar
-    closeButton.addEventListener('click', () => {
-        modal.style.display = "none";
-    });
-    
-    // Ocultar el modal cuando se haga clic fuera de él
-    window.addEventListener('click', (event) => {
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    });
+      container.appendChild(destinationDiv);
+  });
+
+  // Obtener el modal y el botón para cerrarlo
+  const modal = document.getElementById("myModal");
+  const closeButton = document.querySelector(".close");
+
+  // Mostrar el modal cuando se haga clic en el botón de reservar
+  const botonesReservar = document.querySelectorAll('.btn-reservar');
+  botonesReservar.forEach((boton) => {
+      boton.addEventListener('click', () => {
+          modal.style.display = "block";
+      });
+  });
+
+  // Ocultar el modal cuando se haga clic en el botón de cerrar
+  closeButton.addEventListener('click', () => {
+      modal.style.display = "none";
+  });
+
+  // Ocultar el modal cuando se haga clic fuera de él
+  window.addEventListener('click', (event) => {
+      if (event.target === modal) {
+          modal.style.display = "none";
+      }
+  });
 }
-
-
 
 // Mostrar los destinos cuando la página se cargue
 document.addEventListener('DOMContentLoaded', mostrarDestinos);
 
-// document.getElementById('redirectButton').addEventListener('click', function(){
-//   window.location.href = "http://localhost:3333";
-// });
+
 
 
 

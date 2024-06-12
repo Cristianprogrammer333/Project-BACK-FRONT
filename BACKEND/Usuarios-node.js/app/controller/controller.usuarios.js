@@ -46,7 +46,6 @@ export const crearUsuario = async(req, res) =>{
     }
 }
 
-
 export const actualizarUsuario = async(req, res) =>{
     let info = req.body;
     try {

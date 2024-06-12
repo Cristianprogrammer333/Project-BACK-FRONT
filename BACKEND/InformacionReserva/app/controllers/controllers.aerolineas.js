@@ -1,6 +1,5 @@
 import { pool } from "../config/db.mysql.js";
 import { tokenSign } from "../middlewares/middlewares.aerolinea.js";
-
 export const crearAerolineas = async (req, res) => {
 
     let info = req.body;

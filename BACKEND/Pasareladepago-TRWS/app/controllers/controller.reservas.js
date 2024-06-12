@@ -56,6 +56,39 @@ export const MostrarReserva = async(req, res) =>{
     }
 };
 
+export const CrearTarjeta = async(req, res) =>{
+    let info = req.body;
+    try {
+        let resultado = await pool.query(`
+            insert into tarjetas(
+            id,
+            nombre,
+            numerotarjeta,
+            fecha_expiracion,
+            cvv) values (
+            ${info.id},
+            '${info.nombre}',
+            '${info.numerotarjeta}',
+            '${info.fecha_expiracion}',
+            '${info.cvv}')
+            `);
+            if (resultado[0].affectedRows > 0) {
+                res.json({
+                    respuesta: "Tarjeta insertada correctamente"
+                });
+            }else{
+                res.json({
+                    respuesta: "Error al ingresar la tarjeta"
+                });
+            }
+    } catch (error) {
+        res.json({
+            "error": error,
+            "method": "post"
+        });
+    }
+}
+
 export const ActualizarReserva = async(req, res) =>{
     let info = req.body;
     try {

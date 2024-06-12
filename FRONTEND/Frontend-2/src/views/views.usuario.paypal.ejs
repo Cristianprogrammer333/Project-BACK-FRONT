@@ -1,4 +1,63 @@
 <%- include("partials/partials.dash.header.ejs")  %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+  function generatePDF() {
+      // Verifica que jsPDF está cargado
+      if (typeof window.jspdf === 'undefined') {
+          alert('Error: jsPDF no se ha cargado correctamente.');
+          return;
+      }
+
+      const { jsPDF } = window.jspdf;
+
+      // Crear una nueva instancia de jsPDF
+      const doc = new jsPDF();
+
+      // Recoger los datos de los campos del formulario
+      const transporte = document.getElementById('transporte').value;
+      const servicios = document.getElementById('servicios').value;
+      const contacto = document.getElementById('contacto').value;
+      const identificacion = document.getElementById('identificacion').value;
+      const fechaDeReserva = document.getElementById('fecha_de_reserva').value;
+      const descripcion = document.getElementById('descripcion').value;
+      const metodoDePago = document.getElementById('metodo_de_pago').value;
+      const pagar = document.getElementById('pagar').value;
+
+      const currentDate = new Date().toLocaleDateString();
+
+// Definir las coordenadas y el estilo del texto
+const startX = 15;
+let startY = 20;
+const lineHeight = 10;
+
+// Añadir la fecha de creación del documento
+doc.setFontSize(12);
+doc.text(`Fecha de Creación: ${currentDate}`, startX, startY);
+
+// Añadir el encabezado y separador
+doc.setFontSize(18);
+startY += lineHeight * 2;
+doc.text('Detalles de la Reserva', startX, startY);
+doc.setLineWidth(0.5);
+doc.line(startX, startY + 2, 200, startY + 2); // Línea separadora
+
+// Añadir los datos de la reserva
+startY += lineHeight * 2;
+doc.setFontSize(12);
+doc.text(`Transporte: ${transporte}`, startX, startY);
+doc.text(`Servicios: ${servicios}`, startX, startY + lineHeight);
+doc.text(`Número de Contacto: ${contacto}`, startX, startY + lineHeight * 2);
+doc.text(`Número de Identificación: ${identificacion}`, startX, startY + lineHeight * 3);
+doc.text(`Fecha de Reserva: ${fechaDeReserva}`, startX, startY + lineHeight * 4);
+doc.text(`Descripción del Servicio: ${descripcion}`, startX, startY + lineHeight * 5);
+doc.text(`Método de Pago: ${metodoDePago}`, startX, startY + lineHeight * 6);
+doc.text(`Precio Total: ${pagar}`, startX, startY + lineHeight * 7);
+
+// Descargar el PDF
+doc.save('reserva.pdf');
+  }
+</script>
+
 <div class="box box-default">
     <div class="box-header with-border">
       <h3 class="box-title">Añade a tu vuelo las comodidades que prefieras</h3>
@@ -130,11 +189,14 @@
                       <input type="text" class="form-control pull-right" id="pagar">
                     </div>
                   </div>
-                  <a class="btn btn-app" href="http://localhost:3333" target="_blank">
+                  <a class="btn btn-app bg-blue" href="http://localhost:3333" target="_blank">
                     <i class="fa fa-paypal"></i> pagar
                   </a>
-                  <a class="btn btn-app">
+                  <a class="btn btn-app bg-green">
                     <i class="fa fa-save" onclick="RegistrarPagos()"></i> Save
+                  </a>
+                  <a class="btn btn-app bg-red" onclick="generatePDF()">
+                    <i class="fa fa-file-pdf-o"></i> Descargar PDF
                   </a>
                 </div>
                 <!-- /.box-body -->
@@ -148,6 +210,6 @@
     <!-- /.box-body -->
     <div class="box-footer">
     </div>
-  </div>
+</div>
 
 <%- include("partials/partials.dash.footer.ejs")  %>
